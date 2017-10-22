@@ -1,8 +1,16 @@
-<?php require_once("database.php"); ?>
+<?php require_once("database.php"); 
+$id=$_GET['id'];
+$db = new Database();
+$db->select('pembelian','*','','', "id=$id");
+$res= $db->getResult();
+if(count($res) == 0){
+    echo "<b>Tidak ada data yang tersedia</b>";
+}else{
+    foreach ($res as &$r){?> 
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
   <li>
-    <a href="?module=pembelian-create?">Home</a></li>
+    <a href="?module=pembelian-edit?">Home</a></li>
   <li class="disabled">Data Pembelian</li>
 </ul>
 </nav>
@@ -13,7 +21,7 @@
       <label for="nomer" class="text-right middle">nomer</label>
     </div>
     <div class="small-6 cell">
-      <input type="text" name="nomer" placeholder="nomer" required>
+      <input type="text" name="nomer" placeholder="nomer" value="<?php echo $r['nomer']; ?>" required>
     </div>
   </div>
   <!-- field tanggal -->
@@ -22,7 +30,7 @@
       <label for="tanggal" class="text-right middle">tanggal</label>
     </div>
     <div class="small-6 cell">
-      <input type="date" name="tanggal" placeholder="tanggal" required>
+      <input type="date" name="tanggal" placeholder="tanggal" value="<?php echo $r['tanggal']; ?>" required>
     </div>
   </div>
   <!-- field total -->
@@ -31,7 +39,7 @@
       <label for="total" class="text-right middle">total</label>
     </div>
     <div class="small-6 cell">
-      <input type="text" name="total" placeholder="total" required>
+      <input type="text" name="total" placeholder="total" value="<?php echo $r['total']; ?>" required>
     </div>
   </div>
   <!-- field karyawan -->
@@ -62,9 +70,9 @@
       <?php
         $db = new Database();
         $db->select('supplier','id, nama');
-        $res = $db->getResult();
-        foreach ($res as &$r){
-          echo "<option value=$r[id]>$r[nama]</option>";
+        $suppliers = $db->getResult();
+        foreach ($suppliers as &$supplier){
+            echo "<option value=$supplier[id]>$supplier[nama]</option>";
         }    
       ?>
       </select>
@@ -86,50 +94,6 @@
   </div>
 </form>
 <?php 
-
-
-// check action submit
-if(isset($_POST['submit'])){
-  $nomer = $_POST['nomer'];
-  $tanggal = $_POST['tanggal'];
-  $total = $_POST['total'];
-  $karyawan_id = $_POST['karyawan_id'];
-  $supplier_id = $_POST['supplier_id'];
-  
-  // validation empty
-  if(empty($nomer) || empty($total)|| empty($tanggal)|| empty($karyawan_id)|| empty($supplier_id)){
-    if(empty($nomer)){
-      echo "nomer harus diisi";
-    }
-    if(empty($tanggal)){
-      echo "tanggal harus diisi";
-    }
-    if(empty($total)){
-      echo "total harus diisi";
-    }
-    if(empty($karyawan_id)){
-      echo "Karyawan harus diisi";
-    }
-    if(empty($supplier_id)){
-      echo "supplier harus diisi";
-    }
-    
-  } else {
-    $db=new Database();
-    $db->insert('pembelian',
-    array(
-      'nomer'=>$nomer,
-      'tanggal'=>$tanggal,
-      'total'=>$total,
-      'karyawan_id'=>$karyawan_id,
-      'supplier_id'=>$supplier_id
-    ));
-    $res=$db->getResult();
-    // print_r($res);
-    // redirect to list
-    header('Location: /laundry2/index.php?module=pembelian');
-  }
+   }
 }
 ?>
-</html>
-</body>

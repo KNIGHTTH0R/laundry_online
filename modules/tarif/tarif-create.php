@@ -1,37 +1,20 @@
+<?php require_once("database.php"); ?>
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
   <li>
     <a href="?module=tarif-create?">Home</a></li>
-  <li class="disabled">Data tarif</li>
+  <li class="disabled">Data Tarif jenis_laundry</li>
 </ul>
 </nav>
 <form action="" method="post">
-  <!-- field nama -->
+ <!-- field nama -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="nama" class="text-right middle">Nama</label>
+      <label for="nama" class="text-right middle">nama</label>
     </div>
     <div class="small-6 cell">
-      <input type="text" name="nama" placeholder="Nama" required>
+      <input type="text" name="nama" placeholder="nama" required>
     </div>
-  </div>
-  <!-- field jenis_laundry_id -->
-  <div class="grid-x grid-padding-x">
-    <div class="small-3 cell">
-      <label for="jenis_laundry_id" class="text-right middle">jenis laundry</label>
-    </div>
-    <div class="small-6 cell">
-    <select name="jenis_laundry_id">
-    <?php
-      $db = new Database();
-      $db->select('jenis_laundry','id, nama');
-      $res = $db->getResult();
-      foreach ($res as &$r){
-        echo "<option value=$r[id]>$r[nama]</option>";
-      }    
-    ?>
-    </select>
-  </div>
   </div>
   <!-- field harga -->
   <div class="grid-x grid-padding-x">
@@ -42,10 +25,28 @@
       <input type="text" name="harga" placeholder="harga" required>
     </div>
   </div>
+  <!-- field jenis_laundry -->
+  <div class="grid-x grid-padding-x">
+    <div class="small-3 cell">
+      <label for="jenis_laundry_id" class="text-right middle">jenis laundry</label>
+    </div>
+    <div class="small-6 cell">
+      <select name="jenis_laundry_id">
+      <?php
+        $db = new Database();
+        $db->select('jenis_laundry','id, nama');
+        $res = $db->getResult();
+        foreach ($res as &$r){
+          echo "<option value=$r[id]>$r[nama]</option>";
+        }    
+      ?>
+      </select>
+    </div>
+  </div>
   <!-- Aksi -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="nama" class="text-right middle"></label>
+      <label for="harga" class="text-right middle"></label>
     </div>
     <div class="small-6 cell">
 		<div class="small button-group">
@@ -57,30 +58,34 @@
   </div>
 </form>
 <?php 
-require_once("database.php");
+
 
 // check action submit
 if(isset($_POST['submit'])){
-  $nik = $_POST['nik'];
   $nama = $_POST['nama'];
-  $jenis_laundry_id = $_POST['jenis_laundry_id'];
   $harga = $_POST['harga'];
+  $jenis_laundry_id = $_POST['jenis_laundry_id'];
   // validation empty
-  if(empty($nama)|| empty($jenis_laundry_id)|| empty($harga)){
+  if(empty($nama) || empty($harga)|| empty($jenis_laundry_id)){
     if(empty($nama)){
-      echo "Nama harus diisi";
-    }
-    if(empty($jenis_laundry_id)){
-      echo "jenis_laundry_id harus diisi";
+      echo "nama harus diisi";
     }
     if(empty($harga)){
-      echo "tarif harus diisi";
+      echo "harga harus diisi";
     }
-    
+    if(empty($jenis_laundry_id)){
+      echo "jenis_laundry harus diisi";
+    }
   } else {
     $db=new Database();
-    $db->insert('tarif',array('nama'=>$nama, 'jenis_laundry_id'=>$jenis_laundry_id, 'harga'=>$harga));
+    $db->insert('tarif',
+    array(
+      'nama'=>$nama,
+      'harga'=>$harga,
+      'jenis_laundry_id'=>$jenis_laundry_id,
+    ));
     $res=$db->getResult();
+    // print_r($res);
     // redirect to list
     header('Location: /laundry2/index.php?module=tarif');
   }

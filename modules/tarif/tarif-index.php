@@ -1,32 +1,36 @@
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
   <li><a href="?module=home">Home</a></li>
-  <li class="disabled">Data tarif</li>
+  <li class="disabled">Data Tarif barang</li>
 </ul>
 </nav>
   <a href="?module=tarif-create" class="small button">Create</a>
 <table>
   <thead>
       <tr>
-          <th>Nama</th>
-          <th>Jenis Laundry</th>
-          <th>Tarif</th>
+          <th>nama</th>
+          <th>harga </th>
+          <th>jenis laundry </th> 
           <th>Aksi</th>
       </tr>
   </thead>
 <?php
   require_once("database.php");
   $db=new Database();
-  $db->select('tarif', 'id, nama, jenis_laundry_id, harga');
-  $res=$db->getResult();
+  $db->select('tarif', 'tarif.id, tarif.nama,tarif.harga,
+  tarif.jenis_laundry_id, 
+  jenis_laundry.nama as jenis_laundry', 
+  'jenis_laundry ON jenis_laundry.id = tarif.jenis_laundry_id');
+$res=$db->getResult();
+//   print_r($res);
     if(count($res) == 0){
         echo "<b>Tidak ada data yang tersedia</b>";
     }else{
         foreach ($res as &$r){?>
         <tr>
             <td><?php echo $r['nama'] ?></td>
-            <td><?php echo $r['jenis_laundry_id'] ?></td>
-            <td><?php echo $r['tarif'] ?></td>
+            <td><?php echo $r['harga'] ?></td>
+            <td><?php echo $r['jenis_laundry'] ?></td>
             <td>
                 <div class="small button-group">
                     <a href="?module=tarif-show?id=<?php echo $r['id']; ?>" class=" button">View</a>
