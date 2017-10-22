@@ -1,5 +1,6 @@
 <?php
-$module=$_GET['module'];
+$module= empty($_GET['module']) ? 'home' : $_GET['module'] ;
+$id= empty($_GET['id']) ? 'home' : $_GET['id'] ;
 
 switch($module) {
     // Module Home
@@ -21,7 +22,7 @@ switch($module) {
         include 'modules/karyawan/karyawan-delete.php';
     break;
     case 'karyawan-show':
-        include 'modules/karyawan/karyawan-edit.php';
+        include 'modules/karyawan/karyawan-show.php';
     break;
 
     // Module Barang
