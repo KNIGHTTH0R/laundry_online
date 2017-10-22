@@ -1,7 +1,9 @@
-<?php require_once("database.php"); 
+<?php
+ob_start();
+require_once("database.php"); 
 $id=$_GET['id'];
 $db = new Database();
-$db->select('pembelian','*','','', "id=$id");
+$db->select('pembelian','id, nomer, tanggal, total,karyawan_id, supplier_id','','', "id=$id");
 $res= $db->getResult();
 if(count($res) == 0){
     echo "<b>Tidak ada data yang tersedia</b>";
@@ -52,9 +54,9 @@ if(count($res) == 0){
       <?php
         $db = new Database();
         $db->select('karyawan','id, nama');
-        $res = $db->getResult();
-        foreach ($res as &$r){
-          echo "<option value=$r[id]>$r[nama]</option>";
+        $karyawans = $db->getResult();
+        foreach ($karyawans as &$karyawan){
+          echo "<option value=$karyawan[id]>$karyawan[nama]</option>";
         }    
       ?>
       </select>
@@ -71,10 +73,10 @@ if(count($res) == 0){
         $db = new Database();
         $db->select('supplier','id, nama');
         $suppliers = $db->getResult();
-        foreach ($suppliers as &$supplier){
-            echo "<option value=$supplier[id]>$supplier[nama]</option>";
-        }    
-      ?>
+        foreach ($suppliers as &$supplier){ 
+          $selected =$r['supplier_id'] == $supplier['id'] ? 'selected' : '';
+            echo "<option value=$supplier[id]  $selected > $supplier[nama] </option>";
+        }?>
       </select>
     </div>
   </div>
