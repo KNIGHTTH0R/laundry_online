@@ -1,12 +1,12 @@
 <?php
 require_once('database.php');
 $db=new Database();
-  $id = $_GET['id'];
+$id = $_GET['id'];
 
-  $queryhapus = mysqli_query($db, "DELETE FROM 11_deaamaliaputri_laundry WHERE id = $id");
-  $res =$db->getResult();
+$db->delete('jenis_laundry',"id=$id");
+$res = $db->getResult();
   if($res){
-    header('location: index.php');
+    header('Location: /laundry2/index.php?module=jenis_laundry');
    }else{
     echo "Upss Something wrong..";
    }
