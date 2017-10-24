@@ -3,10 +3,10 @@ require_once('database.php');
 $db=new Database();
 $id = $_GET['id'];
 
-  $queryhapus = mysqli_query($db, "DELETE FROM 11_deaamaliaputri_laundry WHERE id = $id");
-  $res =$db->getResult();
+$db->delete('pemakaian_barang',"id=$id");
+$res = $db->getResult();
   if($res){
-    header('location: index.php');
+    header('Location: /laundry2/index.php?module=pemakaian_barang');
    }else{
     echo "Upss Something wrong..";
    }
