@@ -1,55 +1,45 @@
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
   <li>
-    <a href="?module=karyawan-create?">Home</a></li>
-  <li class="disabled">Data Karyawan</li>
+    <a href="?module=transaksi-create?">Home</a></li>
+  <li class="disabled">Data transaksi</li>
 </ul>
 </nav>
 <form action="" method="post">
- <!-- field nik -->
+ <!-- field nomer -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="nik" class="text-right middle">NIK</label>
+      <label for="nomer" class="text-right middle">nomer</label>
     </div>
     <div class="small-6 cell">
-      <input type="text" name="nik" placeholder="NIK" required>
+      <input type="text" name="nomer" placeholder="nomer" required>
     </div>
   </div>
-  <!-- field nama -->
+  <!-- field tanggal_transaksi -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="nama" class="text-right middle">Nama</label>
+      <label for="tanggal_transaksi" class="text-right middle">tanggal transaksi</label>
     </div>
     <div class="small-6 cell">
-      <input type="text" name="nama" placeholder="Nama" required>
+      <input type="date" name="tanggal_transaksi" placeholder="tanggal transaksi" required>
     </div>
   </div>
-  <!-- field alamat -->
+  <!-- field tanggal_ambil -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="alamat" class="text-right middle">Alamat</label>
+      <label for="tanggal_ambil" class="text-right middle">tanggal ambil</label>
     </div>
     <div class="small-6 cell">
-      <input type="text" name="alamat" placeholder="Alamat" required>
+      <input type="date" name="tanggal_ambil" placeholder="tanggal ambil" required>
     </div>
   </div>
-  <!-- field telp -->
+  <!-- field diskon -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="telp" class="text-right middle">Telphone</label>
+      <label for="diskon" class="text-right middle">diskon</label>
     </div>
     <div class="small-6 cell">
-      <input type="text" name="telp" placeholder="Telphone" required>
-    </div>
-  </div>
-  <!-- field gender -->
-  <div class="grid-x grid-padding-x">
-    <div class="small-3 cell">
-      <label for="gender" class="text-right middle">Gender</label>
-    </div>
-    <div class="small-6 cell">    
-      <input type="radio" name="gender" value="L" placeholder="Gender" required>L
-      <input type="radio" name="gender" value="P" placeholder="Gender" required>P
+      <input type="text" name="diskon" placeholder="diskon" required>
     </div>
   </div>
   <!-- Aksi -->
@@ -71,34 +61,31 @@ require_once("database.php");
 
 // check action submit
 if(isset($_POST['submit'])){
-  $nik = $_POST['nik'];
-  $nama = $_POST['nama'];
-  $alamat = $_POST['alamat'];
-  $telp = $_POST['telp'];
-  $gender = $_POST['gender'];
+  $nomer = $_POST['nomer'];
+  $tanggal_transaksi = $_POST['tanggal_transaksi'];
+  $tanggal_ambil = $_POST['tanggal_ambil'];
+  $diskon = $_POST['diskon'];
   // validation empty
-  if(empty($nik) || empty($nama)|| empty($alamat)|| empty($telp)|| empty($gender)){
-    if(empty($nik)){
-      echo "NIK harus diisi";
+  if(empty($nomer) || empty($tanggal_transaksi)|| empty($tanggal_ambil)){
+    if(empty($nomer)){
+      echo "nomer harus diisi";
     }
-    if(empty($nama)){
-      echo "Nama harus diisi";
+    if(empty($tanggal_transaksi)){
+      echo "tanggal_transaksi harus diisi";
     }
-    if(empty($alamat)){
-      echo "Alamat harus diisi";
+    if(empty($tanggal_ambil)){
+      echo "tanggal_ambil harus diisi";
     }
-    if(empty($telp)){
-      echo "Telp harus diisi";
-    }
-    if(empty($gender)){
-      echo "Gender harus diisi";
+    if(empty($diskon)){
+      echo "diskon harus diisi";
     }
   } else {
     $db=new Database();
-    $db->insert('karyawan',array('nik'=>$nik, 'nama'=>$nama, 'alamat'=>$alamat, 'telp'=>$telp, 'gender'=>$gender));
+    $db->insert('transaksi',array('nomer'=>$nomer, 'tanggal_transaksi'=>$tanggal_transaksi,
+                'tanggal_ambil'=>$tanggal_ambil, 'diskon'=>$diskon));
     $res=$db->getResult();
     // redirect to list
-    header('Location: /laundry2/index.php?module=karyawan');
+    header('Location: /laundry2/index.php?module=transaksi');
   }
 }
 ?>
