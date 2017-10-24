@@ -1,3 +1,5 @@
+session_start();
+ob_start();
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
   <li>
