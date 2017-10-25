@@ -39,7 +39,7 @@ switch($module) {
     include 'modules/barang/barang-delete.php';
     break;
     case 'barang-show':
-    include 'modules/barang/barang-edit.php';
+    include 'modules/barang/barang-show.php';
     break;
    
      // Module konsumen
@@ -56,7 +56,7 @@ switch($module) {
      include 'modules/konsumen/konsumen-delete.php';
      break;
      case 'konsumen-show':
-     include 'modules/konsumen/konsumen-edit.php';
+     include 'modules/konsumen/konsumen-show.php';
      break;
    
       // Module Supplier
@@ -73,7 +73,7 @@ switch($module) {
     include 'modules/supplier/supplier-delete.php';
     break;
     case 'supplier-show':
-    include 'modules/supplier/supplier-edit.php';
+    include 'modules/supplier/supplier-show.php';
     break;
 
     // Module pemakaian_barang
@@ -90,7 +90,7 @@ switch($module) {
     include 'modules/pemakaian_barang/pemakaian_barang-delete.php';
     break;
     case 'pemakaian_barang-show':
-    include 'modules/pemakaian_barang/pemakaian_barang-edit.php';
+    include 'modules/pemakaian_barang/pemakaian_barang-show.php';
     break;
 
       // Module pembelian
@@ -107,7 +107,7 @@ switch($module) {
       include 'modules/pembelian/pembelian-delete.php';
       break;
       case 'pembelian-show':
-      include 'modules/pembelian/pembelian-edit.php';
+      include 'modules/pembelian/pembelian-show.php';
       break;
 
         // Module jenis_laundry
@@ -124,7 +124,7 @@ switch($module) {
     include 'modules/jenis_laundry/jenis_laundry-delete.php';
     break;
     case 'jenis_laundry-show':
-    include 'modules/jenis_laundry/jenis_laundry-edit.php';
+    include 'modules/jenis_laundry/jenis_laundry-show.php';
     break;
     
     // Module tarif
@@ -141,7 +141,7 @@ switch($module) {
     include 'modules/tarif/tarif-delete.php';
     break;
     case 'tarif-show':
-    include 'modules/tarif/tarif-edit.php';
+    include 'modules/tarif/tarif-show.php';
     break;
 
     // Module transaksi
@@ -158,7 +158,7 @@ switch($module) {
     include 'modules/transaksi/transaksi-delete.php';
     break;
     case 'transaksi-show':
-    include 'modules/transaksi/transaksi-edit.php';
+    include 'modules/transaksi/transaksi-show.php';
     break;
 
     // Module rincian_pembelian
@@ -175,7 +175,7 @@ switch($module) {
     include 'modules/rincian_pembelian/rincian_pembelian-delete.php';
     break;
     case 'rincian_pembelian-show':
-    include 'modules/rincian_pembelian/rincian_pembelian-edit.php';
+    include 'modules/rincian_pembelian/rincian_pembelian-show.php';
     break;
 
     // Module rincian_transaksi
@@ -192,7 +192,7 @@ switch($module) {
     include 'modules/rincian_transaksi/rincian_transaksi-delete.php';
     break;
     case 'rincian_transaksi-show':
-    include 'modules/rincian_transaksi/rincian_transaksi-edit.php';
+    include 'modules/rincian_transaksi/rincian_transaksi-show.php';
     break;
 
     
