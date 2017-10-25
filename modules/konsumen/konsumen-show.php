@@ -9,6 +9,10 @@ ob_start();
     <a href="?module=konsumen?">Home</a></li>
   <li class="disabled">Detail konsumen</li>
 </ul>
+<md-dialog style="width: 1200px;">
+    <div class="panel-heading" style="background: #33425b;">
+        <span class="font-bold"><center><font color="white">DATA KONSUMEN LAUNDRY</font></center></span>
+    </div>
 </nav>
 <div class="grid-x grid-padding-x">
 <?php
@@ -29,6 +33,7 @@ if(count($res) == 0){ ?>
 ?>
 <table>
   <tbody>
+  <th>
     <tr>
       <td>Kode :</td>
       <td><?php echo $r['kode']; ?></td>
@@ -41,6 +46,7 @@ if(count($res) == 0){ ?>
       <td>Alamat :</td>
       <td><?php echo $r['alamat']; ?></td>
     </tr>
+    </th>
   </tbody>
 </table>
 <a href="?module=konsumen-delete&id=<?php echo $r['id']; ?>"onClick='return confirm("Apakah yakin menghapus?")' class="alert button">Delete</a>
