@@ -1,3 +1,6 @@
+<?php
+ob_start();
+?>
 <?php require_once("database.php"); ?>
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
@@ -111,5 +114,3 @@ if(isset($_POST['submit'])){
   header('Location: /laundry2/index.php?module=pembelian');
 }
 ?>
-</html>
-</body>
