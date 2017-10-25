@@ -1,3 +1,7 @@
+<?php
+ob_start();
+?>
+<?php require_once("database.php"); ?>
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
   <li>
@@ -18,19 +22,19 @@
   <!-- field tanggal_transaksi -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="tanggal_transaksi" class="text-right middle">tanggal transaksi</label>
+      <label for="tanggal_transaksi" class="text-right middle">Tanggal Transaksi</label>
     </div>
     <div class="small-6 cell">
-      <input type="date" name="tanggal_transaksi" placeholder="tanggal transaksi" required>
+      <input type="date" name="tanggal_transaksi" placeholder="tanggal_transaksi" required>
     </div>
   </div>
   <!-- field tanggal_ambil -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="tanggal_ambil" class="text-right middle">tanggal ambil</label>
+      <label for="tanggal_ambil" class="text-right middle">Tanggal Ambil</label>
     </div>
     <div class="small-6 cell">
-      <input type="date" name="tanggal_ambil" placeholder="tanggal ambil" required>
+      <input type="date" name="tanggal_ambil" placeholder="tanggal_ambil" required>
     </div>
   </div>
   <!-- field diskon -->
@@ -45,7 +49,7 @@
   <!-- Aksi -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="nama" class="text-right middle"></label>
+      <label for="tanggal" class="text-right middle"></label>
     </div>
     <div class="small-6 cell">
 		<div class="small button-group">
@@ -57,7 +61,7 @@
   </div>
 </form>
 <?php 
-require_once("database.php");
+
 
 // check action submit
 if(isset($_POST['submit'])){
@@ -67,9 +71,15 @@ if(isset($_POST['submit'])){
   $diskon = $_POST['diskon'];
   
   $db=new Database();
-  $db->insert('transaksi',array('nomer'=>$nomer, 'tanggal_transaksi'=>$tanggal_transaksi,
-              'tanggal_ambil'=>$tanggal_ambil, 'diskon'=>$diskon));
+  $db->insert('transaksi',
+  array(
+    'nomer'=>$nomer,
+    'tanggal_transaksi'=>$tanggal_transaksi,
+    'tanggal_ambil'=>$tanggal_ambil,
+    'diskon'=>$diskon,
+  ));
   $res=$db->getResult();
+  // print_r($res);
   // redirect to list
   header('Location: /laundry2/index.php?module=transaksi');
 }
