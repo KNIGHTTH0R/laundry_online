@@ -33,9 +33,9 @@ $res=$db->getResult();
             <td><?php echo $r['jenis_laundry'] ?></td>
             <td>
                 <div class="small button-group">
-                    <a href="?module=tarif-show?id=<?php echo $r['id']; ?>" class=" button">View</a>
-                    <a href="?module=tarif-edit?id=<?php echo $r['id']; ?>" class="secondary button">Edit</a>
-                    <a href="?module=tarif-delete?id=<?php echo $r['id']; ?>"onClick='return confirm("Apakah yakin menghapus?")' class="alert button">Delete</a>
+                    <a href="?module=tarif-show&id=<?php echo $r['id']; ?>" class=" button">View</a>
+                    <a href="?module=tarif-edit&id=<?php echo $r['id']; ?>" class="secondary button">Edit</a>
+                    <a href="?module=tarif-delete&id=<?php echo $r['id']; ?>"onClick='return confirm("Apakah yakin menghapus?")' class="alert button">Delete</a>
                 </div>
             </td>
         </tr>
