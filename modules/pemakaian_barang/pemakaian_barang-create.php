@@ -87,35 +87,18 @@ if(isset($_POST['submit'])){
   $jumlah = $_POST['jumlah'];
   $barang_id = $_POST['barang_id'];
   $karyawan_id = $_POST['karyawan_id'];
-  // validation empty
-  if(empty($kode) || empty($jumlah)|| empty($barang_id)|| empty($karyawan_id)){
-    if(empty($kode)){
-      echo "KODE harus diisi";
-    }
-    if(empty($jumlah)){
-      echo "jumlah harus diisi";
-    }
-    if(empty($barang_id)){
-      echo "Barang harus diisi";
-    }
-    if(empty($karyawan_id)){
-      echo "Karyawan harus diisi";
-    }
-  } else {
-    $db=new Database();
-    $db->insert('pemakaian_barang',
-    array(
-      'kode'=>$kode,
-      'jumlah'=>$jumlah,
-      'barang_id'=>$barang_id,
-      'karyawan_id'=>$karyawan_id
-    ));
-    $res=$db->getResult();
-    // print_r($res);
-    // redirect to list
-    header('Location: /laundry2/index.php?module=pemakaian_barang');
-  }
+  
+  $db=new Database();
+  $db->insert('pemakaian_barang',
+  array(
+    'kode'=>$kode,
+    'jumlah'=>$jumlah,
+    'barang_id'=>$barang_id,
+    'karyawan_id'=>$karyawan_id
+  ));
+  $res=$db->getResult();
+  // print_r($res);
+  // redirect to list
+  header('Location: /laundry2/index.php?module=pemakaian_barang');
 }
 ?>
-</html>
-</body>

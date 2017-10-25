@@ -65,28 +65,11 @@ if(isset($_POST['submit'])){
   $nama = $_POST['nama'];
   $stok = $_POST['stok'];
   $tanggal_update_stok = $_POST['tanggal_update_stok'];
-  // validation empty
-  if(empty($kode) || empty($nama)|| empty($stok)|| empty($tanggal_update_stok)){
-    if(empty($kode)){
-      echo "kode harus diisi";
-    }
-    if(empty($nama)){
-      echo "Nama harus diisi";
-    }
-    if(empty($stok)){
-      echo "stok harus diisi";
-    }
-    if(empty($tanggal_update_stok)){
-      echo "tanggal_update_stok harus diisi";
-    }
-  } else {
-    $db=new Database();
-    $db->insert('barang',array('kode'=>$kode, 'nama'=>$nama, 'stok'=>$stok, 'tanggal_update_stok'=>$tanggal_update_stok));
-    $res=$db->getResult();
-    // redirect to list
-    header('Location: /laundry2/index.php?module=barang');
-  }
+  
+  $db=new Database();
+  $db->insert('barang',array('kode'=>$kode, 'nama'=>$nama, 'stok'=>$stok, 'tanggal_update_stok'=>$tanggal_update_stok));
+  $res=$db->getResult();
+  // redirect to list
+  header('Location: /laundry2/index.php?module=barang');
 }
 ?>
-</html>
-</body>

@@ -35,20 +35,11 @@ require_once("database.php");
 // check action submit
 if(isset($_POST['submit'])){
   $nama = $_POST['nama'];
-  // validation empty
-  if(empty($nama)){
-    if(empty($nama)){
-      echo "Nama harus diisi";
-    }
-    
-  } else {
-    $db=new Database();
-    $db->insert('jenis_laundry',array('nama'=>$nama));
-    $res=$db->getResult();
-    // redirect to list
-    header('Location: /laundry2/index.php?module=jenis_laundry');
-  }
+  
+  $db=new Database();
+  $db->insert('jenis_laundry',array('nama'=>$nama));
+  $res=$db->getResult();
+  // redirect to list
+  header('Location: /laundry2/index.php?module=jenis_laundry');
 }
 ?>
-</html>
-</body>

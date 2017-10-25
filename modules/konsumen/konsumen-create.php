@@ -55,25 +55,11 @@ if(isset($_POST['submit'])){
   $kode = $_POST['kode'];
   $nama = $_POST['nama'];
   $alamat = $_POST['alamat'];
-  // validation empty
-  if(empty($kode) || empty($nama)|| empty($alamat)){
-    if(empty($kode)){
-      echo "KODE harus diisi";
-    }
-    if(empty($nama)){
-      echo "Nama harus diisi";
-    }
-    if(empty($alamat)){
-      echo "Alamat harus diisi";
-    }
-  } else {
-    $db=new Database();
-    $db->insert('konsumen',array('kode'=>$kode, 'nama'=>$nama, 'alamat'=>$alamat));
-    $res=$db->getResult();
-    // redirect to list
-    header('Location: /laundry2/index.php?module=konsumen');
-  }
+  
+  $db=new Database();
+  $db->insert('konsumen',array('kode'=>$kode, 'nama'=>$nama, 'alamat'=>$alamat));
+  $res=$db->getResult();
+  // redirect to list
+  header('Location: /laundry2/index.php?module=konsumen');
 }
 ?>
-</html>
-</body>

@@ -65,29 +65,12 @@ if(isset($_POST['submit'])){
   $tanggal_transaksi = $_POST['tanggal_transaksi'];
   $tanggal_ambil = $_POST['tanggal_ambil'];
   $diskon = $_POST['diskon'];
-  // validation empty
-  if(empty($nomer) || empty($tanggal_transaksi)|| empty($tanggal_ambil)){
-    if(empty($nomer)){
-      echo "nomer harus diisi";
-    }
-    if(empty($tanggal_transaksi)){
-      echo "tanggal_transaksi harus diisi";
-    }
-    if(empty($tanggal_ambil)){
-      echo "tanggal_ambil harus diisi";
-    }
-    if(empty($diskon)){
-      echo "diskon harus diisi";
-    }
-  } else {
-    $db=new Database();
-    $db->insert('transaksi',array('nomer'=>$nomer, 'tanggal_transaksi'=>$tanggal_transaksi,
-                'tanggal_ambil'=>$tanggal_ambil, 'diskon'=>$diskon));
-    $res=$db->getResult();
-    // redirect to list
-    header('Location: /laundry2/index.php?module=transaksi');
-  }
+  
+  $db=new Database();
+  $db->insert('transaksi',array('nomer'=>$nomer, 'tanggal_transaksi'=>$tanggal_transaksi,
+              'tanggal_ambil'=>$tanggal_ambil, 'diskon'=>$diskon));
+  $res=$db->getResult();
+  // redirect to list
+  header('Location: /laundry2/index.php?module=transaksi');
 }
 ?>
-</html>
-</body>
