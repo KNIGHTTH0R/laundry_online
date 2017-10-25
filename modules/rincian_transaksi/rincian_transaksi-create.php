@@ -1,61 +1,66 @@
+<?php
+ob_start();
+?>
+<?php require_once("database.php"); ?>
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
   <li>
-    <a href="?module=karyawan-create?">Home</a></li>
-  <li class="disabled">Data Karyawan</li>
+    <a href="?module=rincian_transaksi-create?">Home</a></li>
+  <li class="disabled">Data Rincian Transaksi</li>
 </ul>
 </nav>
 <form action="" method="post">
- <!-- field nik -->
+  <!-- field jumlah -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="nik" class="text-right middle">NIK</label>
+      <label for="jumlah" class="text-right middle">Jumlah</label>
     </div>
     <div class="small-6 cell">
-      <input type="text" name="nik" placeholder="NIK" required>
+      <input type="text" name="jumlah" placeholder="jumlah" required>
     </div>
   </div>
-  <!-- field nama -->
+  <!-- field transaksi -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="nama" class="text-right middle">Nama</label>
+      <label for="transaksi_id" class="text-right middle">transaksi</label>
     </div>
     <div class="small-6 cell">
-      <input type="text" name="nama" placeholder="Nama" required>
+      <select name="transaksi_id">
+      <option value = ""> Pilih Nomer Transaksi </option>
+      <?php
+        $db = new Database();
+        $db->select('transaksi','id, nomer');
+        $res = $db->getResult();
+        foreach ($res as &$r){
+          echo "<option value=$r[id]>$r[nomer]</option>";
+        }    
+      ?>
+      </select>
     </div>
   </div>
-  <!-- field alamat -->
+  <!-- field tarif -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="alamat" class="text-right middle">Alamat</label>
+      <label for="tarif_id" class="text-right middle">tarif</label>
     </div>
     <div class="small-6 cell">
-      <input type="text" name="alamat" placeholder="Alamat" required>
-    </div>
-  </div>
-  <!-- field telp -->
-  <div class="grid-x grid-padding-x">
-    <div class="small-3 cell">
-      <label for="telp" class="text-right middle">Telphone</label>
-    </div>
-    <div class="small-6 cell">
-      <input type="text" name="telp" placeholder="Telphone" required>
-    </div>
-  </div>
-  <!-- field gender -->
-  <div class="grid-x grid-padding-x">
-    <div class="small-3 cell">
-      <label for="gender" class="text-right middle">Gender</label>
-    </div>
-    <div class="small-6 cell">    
-      <input type="radio" name="gender" value="L" placeholder="Gender" required>L
-      <input type="radio" name="gender" value="P" placeholder="Gender" required>P
+    <select name="tarif_id">
+    <option value = ""> Pilih Harga </option>
+      <?php
+        $db = new Database();
+        $db->select('tarif','id, harga');
+        $res = $db->getResult();
+        foreach ($res as &$r){
+          echo "<option value=$r[id]>$r[harga]</option>";
+        }    
+      ?>
+      </select>
     </div>
   </div>
   <!-- Aksi -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="nama" class="text-right middle"></label>
+      <label for="jumlah" class="text-right middle"></label>
     </div>
     <div class="small-6 cell">
 		<div class="small button-group">
@@ -67,20 +72,24 @@
   </div>
 </form>
 <?php 
-require_once("database.php");
+
 
 // check action submit
 if(isset($_POST['submit'])){
-  $nik = $_POST['nik'];
-  $nama = $_POST['nama'];
-  $alamat = $_POST['alamat'];
-  $telp = $_POST['telp'];
-  $gender = $_POST['gender'];
+  $jumlah = $_POST['jumlah'];
+  $transaksi_id = $_POST['transaksi_id'];
+  $tarif_id = $_POST['tarif_id'];
   
   $db=new Database();
-  $db->insert('karyawan',array('nik'=>$nik, 'nama'=>$nama, 'alamat'=>$alamat, 'telp'=>$telp, 'gender'=>$gender));
+  $db->insert('rincian_transaksi',
+  array(
+    'jumlah'=>$jumlah,
+    'transaksi_id'=>$transaksi_id,
+    'tarif_id'=>$tarif_id
+  ));
   $res=$db->getResult();
+  // print_r($res);
   // redirect to list
-  header('Location: /laundry2/index.php?module=karyawan');
+  header('Location: /laundry2/index.php?module=rincian_transaksi');
 }
 ?>
