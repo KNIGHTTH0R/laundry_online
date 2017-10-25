@@ -96,39 +96,19 @@ if(isset($_POST['submit'])){
   $karyawan_id = $_POST['karyawan_id'];
   $supplier_id = $_POST['supplier_id'];
   
-  // validation empty
-  if(empty($nomer) || empty($total)|| empty($tanggal)|| empty($karyawan_id)|| empty($supplier_id)){
-    if(empty($nomer)){
-      echo "nomer harus diisi";
-    }
-    if(empty($tanggal)){
-      echo "tanggal harus diisi";
-    }
-    if(empty($total)){
-      echo "total harus diisi";
-    }
-    if(empty($karyawan_id)){
-      echo "Karyawan harus diisi";
-    }
-    if(empty($supplier_id)){
-      echo "supplier harus diisi";
-    }
-    
-  } else {
-    $db=new Database();
-    $db->insert('pembelian',
-    array(
-      'nomer'=>$nomer,
-      'tanggal'=>$tanggal,
-      'total'=>$total,
-      'karyawan_id'=>$karyawan_id,
-      'supplier_id'=>$supplier_id
-    ));
-    $res=$db->getResult();
-    // print_r($res);
-    // redirect to list
-    header('Location: /laundry2/index.php?module=pembelian');
-  }
+  $db=new Database();
+  $db->insert('pembelian',
+  array(
+    'nomer'=>$nomer,
+    'tanggal'=>$tanggal,
+    'total'=>$total,
+    'karyawan_id'=>$karyawan_id,
+    'supplier_id'=>$supplier_id
+  ));
+  $res=$db->getResult();
+  // print_r($res);
+  // redirect to list
+  header('Location: /laundry2/index.php?module=pembelian');
 }
 ?>
 </html>

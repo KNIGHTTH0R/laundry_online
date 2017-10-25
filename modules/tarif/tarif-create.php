@@ -65,31 +65,17 @@ if(isset($_POST['submit'])){
   $nama = $_POST['nama'];
   $harga = $_POST['harga'];
   $jenis_laundry_id = $_POST['jenis_laundry_id'];
-  // validation empty
-  if(empty($nama) || empty($harga)|| empty($jenis_laundry_id)){
-    if(empty($nama)){
-      echo "nama harus diisi";
-    }
-    if(empty($harga)){
-      echo "harga harus diisi";
-    }
-    if(empty($jenis_laundry_id)){
-      echo "jenis_laundry harus diisi";
-    }
-  } else {
-    $db=new Database();
-    $db->insert('tarif',
-    array(
-      'nama'=>$nama,
-      'harga'=>$harga,
-      'jenis_laundry_id'=>$jenis_laundry_id,
-    ));
-    $res=$db->getResult();
-    // print_r($res);
-    // redirect to list
-    header('Location: /laundry2/index.php?module=tarif');
-  }
+  
+  $db=new Database();
+  $db->insert('tarif',
+  array(
+    'nama'=>$nama,
+    'harga'=>$harga,
+    'jenis_laundry_id'=>$jenis_laundry_id,
+  ));
+  $res=$db->getResult();
+  // print_r($res);
+  // redirect to list
+  header('Location: /laundry2/index.php?module=tarif');
 }
 ?>
-</html>
-</body>

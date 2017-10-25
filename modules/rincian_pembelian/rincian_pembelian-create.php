@@ -78,31 +78,11 @@ if(isset($_POST['submit'])){
   $alamat = $_POST['alamat'];
   $telp = $_POST['telp'];
   $gender = $_POST['gender'];
-  // validation empty
-  if(empty($nik) || empty($nama)|| empty($alamat)|| empty($telp)|| empty($gender)){
-    if(empty($nik)){
-      echo "NIK harus diisi";
-    }
-    if(empty($nama)){
-      echo "Nama harus diisi";
-    }
-    if(empty($alamat)){
-      echo "Alamat harus diisi";
-    }
-    if(empty($telp)){
-      echo "Telp harus diisi";
-    }
-    if(empty($gender)){
-      echo "Gender harus diisi";
-    }
-  } else {
-    $db=new Database();
-    $db->insert('karyawan',array('nik'=>$nik, 'nama'=>$nama, 'alamat'=>$alamat, 'telp'=>$telp, 'gender'=>$gender));
-    $res=$db->getResult();
-    // redirect to list
-    header('Location: /laundry2/index.php?module=karyawan');
-  }
+  
+  $db=new Database();
+  $db->insert('karyawan',array('nik'=>$nik, 'nama'=>$nama, 'alamat'=>$alamat, 'telp'=>$telp, 'gender'=>$gender));
+  $res=$db->getResult();
+  // redirect to list
+  header('Location: /laundry2/index.php?module=karyawan');
 }
 ?>
-</html>
-</body>
