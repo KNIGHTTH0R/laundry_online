@@ -1,63 +1,75 @@
-session_start();
+<?php
 ob_start();
+?>
+<?php require_once("database.php"); ?>
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
   <li>
-    <a href="?module=karyawan-create?">Home</a></li>
-  <li class="disabled">Data Karyawan</li>
+    <a href="?module=rincian_pembelian-create?">Home</a></li>
+  <li class="disabled">Data Rincian Transaksi</li>
 </ul>
 </nav>
 <form action="" method="post">
- <!-- field nik -->
+ <!-- field nomer -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="nik" class="text-right middle">NIK</label>
+      <label for="nomer" class="text-right middle">nomer</label>
     </div>
     <div class="small-6 cell">
-      <input type="text" name="nik" placeholder="NIK" required>
+      <input type="text" name="nomer" placeholder="nomer" required>
     </div>
   </div>
-  <!-- field nama -->
+  <!-- field jumlah -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="nama" class="text-right middle">Nama</label>
+      <label for="jumlah" class="text-right middle">jumlah</label>
     </div>
     <div class="small-6 cell">
-      <input type="text" name="nama" placeholder="Nama" required>
+      <input type="text" name="jumlah" placeholder="jumlah" required>
     </div>
   </div>
-  <!-- field alamat -->
+  <!-- field barang -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="alamat" class="text-right middle">Alamat</label>
+      <label for="barang_id" class="text-right middle">Barang</label>
     </div>
     <div class="small-6 cell">
-      <input type="text" name="alamat" placeholder="Alamat" required>
+      <select name="barang_id">
+      <option value = ""> Pilih Barang </option>
+      <?php
+        $db = new Database();
+        $db->select('barang','id, nama');
+        $res = $db->getResult();
+        foreach ($res as &$r){
+          echo "<option value=$r[id]>$r[nama]</option>";
+        }    
+      ?>
+      </select>
     </div>
   </div>
-  <!-- field telp -->
+  <!-- field pembelian -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="telp" class="text-right middle">Telphone</label>
+      <label for="pembelian_id" class="text-right middle">pembelian</label>
     </div>
     <div class="small-6 cell">
-      <input type="text" name="telp" placeholder="Telphone" required>
-    </div>
-  </div>
-  <!-- field gender -->
-  <div class="grid-x grid-padding-x">
-    <div class="small-3 cell">
-      <label for="gender" class="text-right middle">Gender</label>
-    </div>
-    <div class="small-6 cell">    
-      <input type="radio" name="gender" value="L" placeholder="Gender" required>L
-      <input type="radio" name="gender" value="P" placeholder="Gender" required>P
+    <select name="pembelian_id">
+    <option value = ""> Pilih Pembelian </option>
+      <?php
+        $db = new Database();
+        $db->select('pembelian','id, tanggal');
+        $res = $db->getResult();
+        foreach ($res as &$r){
+          echo "<option value=$r[id]>$r[tanggal]</option>";
+        }    
+      ?>
+      </select>
     </div>
   </div>
   <!-- Aksi -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="nama" class="text-right middle"></label>
+      <label for="jumlah" class="text-right middle"></label>
     </div>
     <div class="small-6 cell">
 		<div class="small button-group">
@@ -69,20 +81,26 @@ ob_start();
   </div>
 </form>
 <?php 
-require_once("database.php");
+
 
 // check action submit
 if(isset($_POST['submit'])){
-  $nik = $_POST['nik'];
-  $nama = $_POST['nama'];
-  $alamat = $_POST['alamat'];
-  $telp = $_POST['telp'];
-  $gender = $_POST['gender'];
+  $nomer = $_POST['nomer'];
+  $jumlah = $_POST['jumlah'];
+  $barang_id = $_POST['barang_id'];
+  $pembelian_id = $_POST['pembelian_id'];
   
   $db=new Database();
-  $db->insert('karyawan',array('nik'=>$nik, 'nama'=>$nama, 'alamat'=>$alamat, 'telp'=>$telp, 'gender'=>$gender));
+  $db->insert('rincian_pembelian',
+  array(
+    'nomer'=>$nomer,
+    'jumlah'=>$jumlah,
+    'barang_id'=>$barang_id,
+    'pembelian_id'=>$pembelian_id
+  ));
   $res=$db->getResult();
+  // print_r($res);
   // redirect to list
-  header('Location: /laundry2/index.php?module=karyawan');
+  header('Location: /laundry2/index.php?module=rincian_pembelian');
 }
 ?>
