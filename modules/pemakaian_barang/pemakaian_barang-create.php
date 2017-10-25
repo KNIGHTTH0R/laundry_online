@@ -35,6 +35,7 @@ ob_start();
     </div>
     <div class="small-6 cell">
       <select name="barang_id">
+      <option value = ""> Pilih Barang </option>
       <?php
         $db = new Database();
         $db->select('barang','id, nama');
@@ -53,6 +54,7 @@ ob_start();
     </div>
     <div class="small-6 cell">
     <select name="karyawan_id">
+    <option value = ""> Pilih Karyawan </option>
       <?php
         $db = new Database();
         $db->select('karyawan','id, nama');
