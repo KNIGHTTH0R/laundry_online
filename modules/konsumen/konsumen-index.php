@@ -19,9 +19,11 @@
   $db=new Database();
   $db->select('konsumen', 'id, kode, nama, alamat');
   $res=$db->getResult();
-    if(count($res) == 0){
-        echo "<b>Tidak ada data yang tersedia</b>";
-    }else{
+    if(count($res) == 0){ ?>
+        <tr>
+            <td colspan="3">Data tidak tersedia.</td>
+        </tr>
+    <?php }else{
         foreach ($res as &$r){?>
         <tr>
             <td><?php echo $r['kode'] ?></td>
@@ -35,8 +37,5 @@
                 </div>
             </td>
         </tr>
-<?php
-              }
-          }
-          ?>
+<?php } }?>
 </table>
