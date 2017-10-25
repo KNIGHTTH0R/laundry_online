@@ -21,10 +21,12 @@
   $db=new Database();
   $db->select('karyawan', 'id, nik, nama, alamat, telp, gender');
   $res=$db->getResult();
-    if(count($res) == 0){
-        echo "<b>Tidak ada data yang tersedia</b>";
-    }else{
-        foreach ($res as &$r){?>
+  if(count($res) == 0){ ?>
+    <tr>
+        <td colspan="3">Data tidak tersedia.</td>
+    </tr>
+    <?php }else{
+    foreach ($res as &$r){?>
         <tr>
             <td><?php echo $r['nik'] ?></td>
             <td><?php echo $r['nama'] ?></td>
