@@ -22,7 +22,9 @@
     </div>
 
     <!-- Start Top Bar -->
+    <div class="medium-0 cell">
     <?php include 'includes/navbar.php'; ?>
+    </div>
     <!-- End Top Bar -->
 
 

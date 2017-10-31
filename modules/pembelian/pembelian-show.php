@@ -47,11 +47,11 @@ if(count($res) == 0){ ?>
     </tr>
     <tr>
       <td>Karyawan :</td>
-      <td><?php echo $r['karyawan']; ?></td>
+      <td><?php echo $r['karyawan_id']; ?></td>
     </tr>
     <tr>
       <td>Supplier :</td>
-      <td><?php echo $r['supplier']; ?></td>
+      <td><?php echo $r['supplier_id']; ?></td>
     </tr>
     </th>
   </tbody>

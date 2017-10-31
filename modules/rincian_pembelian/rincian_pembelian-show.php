@@ -43,11 +43,11 @@ if(count($res) == 0){ ?>
     </tr>
     <tr>
       <td>barang :</td>
-      <td><?php echo $r['barang']; ?></td>
+      <td><?php echo $r['barang_id']; ?></td>
     </tr>
     <tr>
       <td>pembelian :</td>
-      <td><?php echo $r['pembelian']; ?></td>
+      <td><?php echo $r['pembelian_id']; ?></td>
     </tr>
     </th>
   </tbody>

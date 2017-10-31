@@ -17,9 +17,9 @@
                     <a href ="?module=barang">
                         <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> 
                         <i class="fa fa-folder-open-o fa-stack-1x fa-inverse"></i> </span>
-                        <h2 class="StepTitle">Barang</h2>
+                        <h2 class="StepTitle">Master</h2>
                         <p class="text-small">
-                            Data Barang Laundry
+                            Data Master Laundry
                         </p>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                             class="fa fa-user fa-stack-1x fa-inverse"></i> </span>
                     <h2 class="StepTitle">Data laporan</h2>
                     <p class="text-small">
-                        Tampilan Data Laporan Laundry
+                        Data Laporan Laundry
                     </p>
                 </div>
             </div>

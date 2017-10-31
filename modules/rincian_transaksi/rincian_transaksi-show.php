@@ -39,11 +39,11 @@ if(count($res) == 0){ ?>
     </tr>
     <tr>
       <td>Transaksi :</td>
-      <td><?php echo $r['transaksi']; ?></td>
+      <td><?php echo $r['transaksi_id']; ?></td>
     </tr>
     <tr>
       <td>Tarif :</td>
-      <td><?php echo $r['tarif']; ?></td>
+      <td><?php echo $r['tarif_id']; ?></td>
     </tr>
     </th>
   </tbody>
