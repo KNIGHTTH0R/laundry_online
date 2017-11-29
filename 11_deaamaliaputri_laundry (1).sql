@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 15 Nov 2017 pada 01.46
+-- Generation Time: 29 Nov 2017 pada 06.20
 -- Versi Server: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -39,9 +39,8 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id`, `kode`, `nama`, `stok`, `tanggal_update_stok`) VALUES
-(1, 'B01', 'Baju', '10', '2017-10-08'),
-(2, 'B02', 'celana', '2', '2017-10-08'),
-(3, 'B03', 'Daster', '10', '2017-10-06');
+(1, 'B0001', 'jeans', '20', '2017-11-05'),
+(2, 'B0002', 'Baju putih', '4', '2017-11-06');
 
 -- --------------------------------------------------------
 
@@ -51,17 +50,18 @@ INSERT INTO `barang` (`id`, `kode`, `nama`, `stok`, `tanggal_update_stok`) VALUE
 
 CREATE TABLE `jenis_laundry` (
   `id` int(11) NOT NULL,
-  `nama` varchar(20) NOT NULL
+  `kode` varchar(20) NOT NULL,
+  `nama` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `jenis_laundry`
 --
 
-INSERT INTO `jenis_laundry` (`id`, `nama`) VALUES
-(1, 'Setrika'),
-(3, 'Cuci - Kering'),
-(4, 'Cuci');
+INSERT INTO `jenis_laundry` (`id`, `kode`, `nama`) VALUES
+(1, 'JL0001', 'Cuci-kering'),
+(2, 'JL0002', 'cuci - kering- setrika'),
+(3, 'JL0003', 'Setrika');
 
 -- --------------------------------------------------------
 
@@ -83,11 +83,9 @@ CREATE TABLE `karyawan` (
 --
 
 INSERT INTO `karyawan` (`id`, `nik`, `nama`, `alamat`, `telp`, `gender`) VALUES
-(5, 'KA03', 'amalia', 'kepanjen', '0812343511', 'L'),
-(6, 'KA01', 'Dea Amalia Putri', 'Malang', '0812345678', 'P'),
-(7, 'KA02', 'Dea Amalia Putri', 'Malang', '08384738', 'P'),
-(8, 'KA04', 'siiwi', 'cokolio', '098764256', 'P'),
-(9, 'KA05', 'matematika', 'sukun', '098765677', 'L');
+(1, 'KR0001', 'Dea Amalia Putri ', 'kepanjen ', '085945443', 'P'),
+(2, 'KR0002', 'Achmad Bima Sakti Nugroho', 'Kromengan ', '08675444', 'L'),
+(3, 'KR0003', 'Nuzud Nur Jamilah', 'PanggungRejo', '0586696', 'P');
 
 -- --------------------------------------------------------
 
@@ -107,11 +105,9 @@ CREATE TABLE `konsumen` (
 --
 
 INSERT INTO `konsumen` (`id`, `kode`, `nama`, `alamat`) VALUES
-(1, 'K01', 'amalia', 'kepanjen'),
-(2, 'K02', 'Amalia putra', 'solo'),
-(3, 'K03', 'Salsa ', 'Pagak'),
-(4, 'K04', 'Alfin', 'tegalsari'),
-(5, 'K05', 'Syamsudin', 'wagir');
+(1, 'K0001', 'Arifasiwi Milanda Putri', 'Cokolio Kepanjen'),
+(2, 'K0002', 'Khamilatul Zahro ', 'Kedungpedaringan'),
+(3, 'K0003', 'Lailatul Fitriyah', 'Bululawang');
 
 -- --------------------------------------------------------
 
@@ -132,8 +128,7 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id`, `username`, `password`, `type`, `karyawan_id`) VALUES
-(1, 'dea', '96991368fec63c8a1bfc48a70010f84a', 'admin', 6),
-(2, 'amalia', '51e0a46ceb9b9f53a96281bd6b4f38e8', 'user', 5);
+(1, 'dea', '96991368fec63c8a1bfc48a70010f84a', 'user', 1);
 
 -- --------------------------------------------------------
 
@@ -154,11 +149,7 @@ CREATE TABLE `pemakaian_barang` (
 --
 
 INSERT INTO `pemakaian_barang` (`id`, `kode`, `jumlah`, `barang_id`, `karyawan_id`) VALUES
-(1, 'PB01', '10', 2, 6),
-(2, 'PB02', '10', 1, 5),
-(3, 'PB03', '30', 2, 8),
-(4, 'PB04', '30', 2, 7),
-(5, 'PB05', '22', 2, 5);
+(6, 'PB0001', '3', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -180,7 +171,7 @@ CREATE TABLE `pembelian` (
 --
 
 INSERT INTO `pembelian` (`id`, `nomer`, `tanggal`, `total`, `karyawan_id`, `supplier_id`) VALUES
-(2, '01', '2017-10-18', '700000', 7, 4);
+(3, 'NO0001', '2017-11-04', '300.000', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -203,7 +194,7 @@ CREATE TABLE `rincian` (
 --
 
 INSERT INTO `rincian` (`id`, `jumlah`, `tarif_id`, `tarif_nama`, `tarif`, `jenis_laundry_id`, `jenis_laundry_nama`) VALUES
-(1, 2, 6, '', 0, 1, '');
+(1, 1, 1, '', 0, 1, '');
 
 -- --------------------------------------------------------
 
@@ -224,7 +215,7 @@ CREATE TABLE `rincian_pembelian` (
 --
 
 INSERT INTO `rincian_pembelian` (`id`, `nomer`, `jumlah`, `barang_id`, `pembelian_id`) VALUES
-(1, '01', '30', 3, 2);
+(1, 'N0004', '200000', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -234,10 +225,21 @@ INSERT INTO `rincian_pembelian` (`id`, `nomer`, `jumlah`, `barang_id`, `pembelia
 
 CREATE TABLE `rincian_transaksi` (
   `id` int(11) NOT NULL,
+  `karyawan_id` varchar(50) NOT NULL,
+  `konsumen_id` varchar(50) NOT NULL,
   `jumlah` varchar(20) NOT NULL,
   `transaksi_id` int(11) NOT NULL,
+  `barang_id` varchar(50) NOT NULL,
+  `jenis_laundry_id` varchar(20) NOT NULL,
   `tarif_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `rincian_transaksi`
+--
+
+INSERT INTO `rincian_transaksi` (`id`, `karyawan_id`, `konsumen_id`, `jumlah`, `transaksi_id`, `barang_id`, `jenis_laundry_id`, `tarif_id`) VALUES
+(2, '1', '3', '9', 1, '3', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -257,9 +259,10 @@ CREATE TABLE `supplier` (
 --
 
 INSERT INTO `supplier` (`id`, `nama`, `alamat`, `telp`) VALUES
-(1, 'Dea Ananda', 'Cempokoulyo', '0849'),
-(2, 'Oke', 'boyolali', '088789789'),
-(4, 'Barack', 'Amerika', '089927');
+(1, 'Chayang Phygiken Master Andika', 'Talangagung', '08988787'),
+(2, 'Fany Faiturrohman', 'Kedungpedaringan', '0898799'),
+(3, 'salsa sandra', 'Pagak', '08999799'),
+(4, 'cintya', 'mergosingo', '068999000');
 
 -- --------------------------------------------------------
 
@@ -279,8 +282,7 @@ CREATE TABLE `tarif` (
 --
 
 INSERT INTO `tarif` (`id`, `nama`, `harga`, `jenis_laundry_id`) VALUES
-(6, 'pakaian putih', '100000', 1),
-(7, 'jeans', '30000', 3);
+(1, 'jeans', '2000', 1);
 
 -- --------------------------------------------------------
 
@@ -303,8 +305,7 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id`, `nomer`, `tanggal_transaksi`, `tanggal_ambil`, `diskon`, `konsumen_id`, `karyawan_id`) VALUES
-(3, '01', '2017-11-14', '2017-11-16', '5%', 1, 6),
-(4, '02', '2017-11-16', '2017-11-17', '5%', 4, 9);
+(1, '1', '2017-11-03', '2017-11-05', '50%', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -406,37 +407,37 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `jenis_laundry`
 --
 ALTER TABLE `jenis_laundry`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `konsumen`
 --
 ALTER TABLE `konsumen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `pemakaian_barang`
 --
 ALTER TABLE `pemakaian_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `rincian`
 --
@@ -451,7 +452,7 @@ ALTER TABLE `rincian_pembelian`
 -- AUTO_INCREMENT for table `rincian_transaksi`
 --
 ALTER TABLE `rincian_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `supplier`
 --
@@ -461,55 +462,12 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `tarif`
 --
 ALTER TABLE `tarif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
---
-
---
--- Ketidakleluasaan untuk tabel `login`
---
-ALTER TABLE `login`
-  ADD CONSTRAINT `login_ibfk_1` FOREIGN KEY (`karyawan_id`) REFERENCES `karyawan` (`id`) ON DELETE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `pemakaian_barang`
---
-ALTER TABLE `pemakaian_barang`
-  ADD CONSTRAINT `pemakaian_barang_ibfk_1` FOREIGN KEY (`barang_id`) REFERENCES `barang` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `pemakaian_barang_ibfk_2` FOREIGN KEY (`karyawan_id`) REFERENCES `karyawan` (`id`) ON DELETE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `pembelian`
---
-ALTER TABLE `pembelian`
-  ADD CONSTRAINT `pembelian_ibfk_1` FOREIGN KEY (`karyawan_id`) REFERENCES `karyawan` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `pembelian_ibfk_2` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`id`) ON DELETE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `rincian_pembelian`
---
-ALTER TABLE `rincian_pembelian`
-  ADD CONSTRAINT `rincian_pembelian_ibfk_1` FOREIGN KEY (`barang_id`) REFERENCES `barang` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `rincian_pembelian_ibfk_2` FOREIGN KEY (`pembelian_id`) REFERENCES `pembelian` (`id`) ON DELETE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `rincian_transaksi`
---
-ALTER TABLE `rincian_transaksi`
-  ADD CONSTRAINT `rincian_transaksi_ibfk_1` FOREIGN KEY (`tarif_id`) REFERENCES `tarif` (`id`) ON DELETE CASCADE;
-
---
--- Ketidakleluasaan untuk tabel `tarif`
---
-ALTER TABLE `tarif`
-  ADD CONSTRAINT `tarif_ibfk_1` FOREIGN KEY (`jenis_laundry_id`) REFERENCES `jenis_laundry` (`id`) ON DELETE CASCADE;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
