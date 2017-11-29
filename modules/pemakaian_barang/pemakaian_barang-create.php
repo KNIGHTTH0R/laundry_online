@@ -10,15 +10,22 @@ ob_start();
 </ul>
 </nav>
 <form action="" method="post">
- <!-- field kode -->
-  <div class="grid-x grid-padding-x">
-    <div class="small-3 cell">
-      <label for="kode" class="text-right middle">Kode</label>
-    </div>
-    <div class="small-6 cell">
-      <input type="text" name="kode" placeholder="kode" required>
-    </div>
-  </div>
+  <!-- field kode -->
+<div class="grid-x grid-padding-x">
+<div class="small-3 cell">
+  <label for="kode" class="text-right middle">Kode</label>
+</div>
+<div class="small-6 cell">
+<?php
+  $db = new Database();
+  $db->selectMax('pemakaian_barang','id');
+  $res = $db->getResult();
+  $kode = $res[0]['max'] < 1 ? $res[0]['max']+1  : $res[0]['max']+1;
+  $value = 'PB000'.$kode;
+  echo "<input type='text' name='kode' value='$value' placeholder='kode' readonly>";
+?>
+</div>
+</div>
   <!-- field jumlah -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">

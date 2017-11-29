@@ -5,27 +5,11 @@ ob_start();
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
   <li>
-    <a href="?module=rincian_pembelian-create?">Home</a></li>
-  <li class="disabled">Data Rincian Transaksi</li>
+    <a href="?module=rincian-create?">Home</a></li>
+  <li class="disabled">Data Pemakaian tarif</li>
 </ul>
 </nav>
 <form action="" method="post">
- <!-- field nomer -->
-<div class="grid-x grid-padding-x">
-<div class="small-3 cell">
-  <label for="nomer" class="text-right middle">nomer</label>
-</div>
-<div class="small-6 cell">
-<?php
-  $db = new Database();
-  $db->selectMax('pembelian','id');
-  $res = $db->getResult();
-  $nomer = $res[0]['max'] < 1 ? $res[0]['max']+1  : $res[0]['max']+1;
-  $value = 'N000'.$nomer;
-  echo "<input type='text' name='nomer' value='$value' placeholder='nomer' readonly>";
-?>
-</div>
-</div>
   <!-- field jumlah -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
@@ -34,18 +18,21 @@ ob_start();
     <div class="small-6 cell">
       <input type="text" name="jumlah" placeholder="jumlah" required>
     </div>
+    <div>
+      kg
+    </div>
   </div>
-  <!-- field barang -->
+  <!-- field tarif -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="barang_id" class="text-right middle">Barang</label>
+      <label for="tarif_id" class="text-right middle">Nama Pakaian</label>
     </div>
     <div class="small-6 cell">
-      <select name="barang_id">
-      <option value = ""> Pilih Barang </option>
+      <select name="tarif_id">
+      <option value = ""> Pilih nama Pakaian </option>
       <?php
         $db = new Database();
-        $db->select('barang','id, nama');
+        $db->select('tarif','id, nama');
         $res = $db->getResult();
         foreach ($res as &$r){
           echo "<option value=$r[id]>$r[nama]</option>";
@@ -54,20 +41,20 @@ ob_start();
       </select>
     </div>
   </div>
-  <!-- field pembelian -->
+  <!-- field jenis_laundry -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
-      <label for="pembelian_id" class="text-right middle">pembelian</label>
+      <label for="jenis_laundry_id" class="text-right middle">nama jenis laundry</label>
     </div>
     <div class="small-6 cell">
-    <select name="pembelian_id">
-    <option value = ""> Pilih Pembelian </option>
+    <select name="jenis_laundry_id">
+    <option value = ""> Pilih jenis laundry </option>
       <?php
         $db = new Database();
-        $db->select('pembelian','id, tanggal');
+        $db->select('jenis_laundry','id, nama');
         $res = $db->getResult();
         foreach ($res as &$r){
-          echo "<option value=$r[id]>$r[tanggal]</option>";
+          echo "<option value=$r[id]>$r[nama]</option>";
         }    
       ?>
       </select>
@@ -92,22 +79,20 @@ ob_start();
 
 // check action submit
 if(isset($_POST['submit'])){
-  $nomer = $_POST['nomer'];
   $jumlah = $_POST['jumlah'];
-  $barang_id = $_POST['barang_id'];
-  $pembelian_id = $_POST['pembelian_id'];
+  $tarif_id = $_POST['tarif_id'];
+  $jenis_laundry_id = $_POST['jenis_laundry_id'];
   
   $db=new Database();
-  $db->insert('rincian_pembelian',
+  $db->insert('rincian',
   array(
-    'nomer'=>$nomer,
     'jumlah'=>$jumlah,
-    'barang_id'=>$barang_id,
-    'pembelian_id'=>$pembelian_id
+    'tarif_id'=>$tarif_id,
+    'jenis_laundry_id'=>$jenis_laundry_id
   ));
   $res=$db->getResult();
   // print_r($res);
   // redirect to list
-  header('Location: /laundry2/index.php?module=rincian_pembelian');
+  header('Location: /laundry2/index.php?module=rincian');
 }
 ?>

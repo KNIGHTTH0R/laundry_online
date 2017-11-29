@@ -11,14 +11,14 @@ ob_start();
 </nav>
 <form action="" method="post">
  <!-- field nomer -->
-  <div class="grid-x grid-padding-x">
-    <div class="small-3 cell">
-      <label for="nomer" class="text-right middle">nomer</label>
-    </div>
-    <div class="small-6 cell">
+<div class="grid-x grid-padding-x">
+<div class="small-3 cell">
+  <label for="nomer" class="text-right middle">nomer</label>
+</div>
+<div class="small-6 cell">
       <input type="text" name="nomer" placeholder="nomer" required>
-    </div>
-  </div>
+</div>
+</div>
   <!-- field tanggal_transaksi -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
@@ -45,7 +45,49 @@ ob_start();
     <div class="small-6 cell">
       <input type="text" name="diskon" placeholder="diskon" required>
     </div>
+    <div>
+      %
+    </div>
   </div>
+  <!-- field konsumen -->
+  <div class="grid-x grid-padding-x">
+    <div class="small-3 cell">
+      <label for="konsumen_id" class="text-right middle">konsumen</label>
+    </div>
+    <div class="small-6 cell">
+      <select name="konsumen_id">
+      <option value = ""> Pilih nama konsumen </option>
+      <?php
+        $db = new Database();
+        $db->select('konsumen','id, nama');
+        $res = $db->getResult();
+        foreach ($res as &$r){
+          echo "<option value=$r[id]>$r[nama]</option>";
+        }    
+      ?>
+      </select>
+    </div>
+  </div>
+  <!-- field karyawan -->
+  <div class="grid-x grid-padding-x">
+    <div class="small-3 cell">
+      <label for="karyawan_id" class="text-right middle">Karyawan</label>
+    </div>
+    <div class="small-6 cell">
+    <select name="karyawan_id">
+    <option value = ""> Pilih Karyawan </option>
+      <?php
+        $db = new Database();
+        $db->select('karyawan','id, nama');
+        $res = $db->getResult();
+        foreach ($res as &$r){
+          echo "<option value=$r[id]>$r[nama]</option>";
+        }    
+      ?>
+      </select>
+    </div>
+  </div>
+  
   <!-- Aksi -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
@@ -69,6 +111,8 @@ if(isset($_POST['submit'])){
   $tanggal_transaksi = $_POST['tanggal_transaksi'];
   $tanggal_ambil = $_POST['tanggal_ambil'];
   $diskon = $_POST['diskon'];
+  $konsumen_id = $_POST['konsumen_id'];
+  $karyawan_id = $_POST['karyawan_id'];
   
   $db=new Database();
   $db->insert('transaksi',
@@ -77,6 +121,8 @@ if(isset($_POST['submit'])){
     'tanggal_transaksi'=>$tanggal_transaksi,
     'tanggal_ambil'=>$tanggal_ambil,
     'diskon'=>$diskon,
+    'konsumen_id'=>$konsumen_id,
+    'karyawan_id'=>$karyawan_id
   ));
   $res=$db->getResult();
   // print_r($res);

@@ -11,14 +11,21 @@ ob_start();
 </nav>
 <form action="" method="post">
  <!-- field nomer -->
-  <div class="grid-x grid-padding-x">
-    <div class="small-3 cell">
-      <label for="nomer" class="text-right middle">nomer</label>
-    </div>
-    <div class="small-6 cell">
-      <input type="text" name="nomer" placeholder="nomer" required>
-    </div>
-  </div>
+<div class="grid-x grid-padding-x">
+<div class="small-3 cell">
+  <label for="nomer" class="text-right middle">nomer</label>
+</div>
+<div class="small-6 cell">
+<?php
+  $db = new Database();
+  $db->selectMax('pembelian','id');
+  $res = $db->getResult();
+  $nomer = $res[0]['max'] < 1 ? $res[0]['max']+1  : $res[0]['max']+1;
+  $value = 'NO000'.$nomer;
+  echo "<input type='text' name='nomer' value='$value' placeholder='nomer' readonly>";
+?>
+</div>
+</div>
   <!-- field tanggal -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
@@ -44,6 +51,7 @@ ob_start();
     </div>
     <div class="small-6 cell">
     <select name="karyawan_id">
+    <option value = ""> Pilih Karyawan </option>
       <?php
         $db = new Database();
         $db->select('karyawan','id, nama');
@@ -62,6 +70,7 @@ ob_start();
     </div>
     <div class="small-6 cell">
       <select name="supplier_id">
+      <option value = ""> Pilih Supplier </option>
       <?php
         $db = new Database();
         $db->select('supplier','id, nama');

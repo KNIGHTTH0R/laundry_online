@@ -1,15 +1,15 @@
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
   <li><a href="?module=home">Home</a></li>
-  <li class="disabled">Data pemakaian rincian_transaksi</li>
+  <li class="disabled">Data rincian transaksi</li>
 </ul>
 </nav>
   <a href="?module=rincian_transaksi-create" class="small button">Create</a>
 <table>
   <thead>
       <tr>
+          <th>Konsumen </th>
           <th>Jumlah </th>
-          <th>Transaksi </th> 
           <th>Tarif </th>
           <th>Aksi</th>
       </tr>
@@ -17,21 +17,24 @@
 <?php
   require_once("database.php");
   $db=new Database();
-  $db->select('rincian_transaksi', 'rincian_transaksi.id, rincian_transaksi.jumlah,
-  rincian_transaksi.transaksi_id, rincian_transaksi.tarif_id, 
-  transaksi.nomer, tarif.harga as tarif', 
-  'transaksi ON transaksi.id = rincian_transaksi.transaksi_id', 
+  $db->select('rincian_transaksi', 'rincian_transaksi.id, rincian_transaksi.konsumen_id, rincian_transaksi.jumlah,
+  rincian_transaksi.tarif_id, 
+  konsumen.nama, tarif.harga as tarif', 
+  'konsumen ON konsumen.id = rincian_transaksi.konsumen_id', 
   'tarif ON tarif.id = rincian_transaksi.tarif_id');
 
   $res=$db->getResult();
 //   print_r($res);
-    if(count($res) == 0){
-        echo "<b>Tidak ada data yang tersedia</b>";
+if(count($res) == 0){ ?>
+    <tr>
+        <td colspan="8">Tidak ada data yang tersedia </td>
+    </tr>
+<?php
     }else{
         foreach ($res as &$r){?>
         <tr>
+            <td><?php echo $r['nama'] ?></td>
             <td><?php echo $r['jumlah'] ?></td>
-            <td><?php echo $r['nomer'] ?></td>
             <td><?php echo $r['tarif'] ?></td>
             <td>
                 <div class="small button-group">

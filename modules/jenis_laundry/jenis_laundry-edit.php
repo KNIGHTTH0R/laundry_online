@@ -18,6 +18,16 @@ if(count($res) == 0){
 </ul>
 </nav>
 <form action="" method="post">
+<!-- field kode -->
+<div class="grid-x grid-padding-x">
+    <div class="small-3 cell">
+      <label for="kode" class="text-right middle">kode</label>
+    </div>
+    <div class="small-6 cell">
+      <input type="hidden" name="id" value="<?php echo $r['id']; ?>">
+      <input type="text" name="kode" placeholder="kode" value="<?php echo $r['kode']; ?>" required>
+    </div>
+  </div>
   <!-- field nama -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
@@ -49,9 +59,11 @@ if(count($res) == 0){
 // check action submit
 if(isset($_POST['submit'])){
   $id = $_POST['id'];
+  $kode = $_POST['kode'];
   $nama = $_POST['nama'];
   $db = new Database();
   $db->update('jenis_laundry',array(
+    'kode'=>$kode,
     'nama'=>$nama,
   ),
     "id=$id"

@@ -1,12 +1,14 @@
 <?php
-$module= empty($_GET['module']) ? 'home' : $_GET['module'] ;
-$id= empty($_GET['id']) ? 'home' : $_GET['id'] ;
+
+// cek apakah module sudah ada apa belum diparameter
+$module = empty($_GET['module']) ? 'home' : $_GET['module'];
 
 switch($module) {
     // Module Home
     case 'home':
     include 'home.php';
     break;
+
 
     // Module Karyawan
     case 'karyawan':
@@ -24,6 +26,22 @@ switch($module) {
     case 'karyawan-show':
         include 'modules/karyawan/karyawan-show.php';
     break;
+     // Module rincian
+     case 'rincian':
+     include 'modules/rincian/rincian-index.php';
+ break;
+ case 'rincian-create':
+     include 'modules/rincian/rincian-create.php';
+ break;
+ case 'rincian-edit':
+     include 'modules/rincian/rincian-edit.php';
+ break;
+ case 'rincian-delete':
+     include 'modules/rincian/rincian-delete.php';
+ break;
+ case 'rincian-show':
+     include 'modules/rincian/rincian-show.php';
+ break;
 
     // Module Barang
     case 'barang':

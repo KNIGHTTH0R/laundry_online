@@ -7,19 +7,21 @@ ob_start();
 <ul class="breadcrumbs">
   <li>
     <a href="?module=konsumen?">Home</a></li>
-  <li class="disabled">Detail konsumen</li>
+  <li class="disabled">Detail konsumen Laundry</li>
 </ul>
-<md-dialog style="width: 1200px;">
-    <div class="panel-heading" style="background: #33425b;">
-        <span class="font-bold"><center><font color="white">DATA KONSUMEN LAUNDRY</font></center></span>
-    </div>
 </nav>
 <div class="grid-x grid-padding-x">
 <?php
 $id=$_GET['id'];
 $db = new Database();
-$db->select('konsumen','*','','', "id=$id");
+$db->select('konsumen', 
+'konsumen.id, 
+konsumen.kode,
+konsumen.nama,
+konsumen.alamat'
+);
 $res= $db->getResult();
+// print_r($res);
 if(count($res) == 0){ ?>
   <table>
     <tbody>
@@ -31,25 +33,45 @@ if(count($res) == 0){ ?>
 <?php }else{
   foreach ($res as &$r){ 
 ?>
-<table>
+<table id="print-area">
   <tbody>
-  <th>
-    <tr>
-      <td>Kode :</td>
-      <td><?php echo $r['kode']; ?></td>
-    </tr>
-    <tr>
-      <td>Nama :</td>
-      <td><?php echo $r['nama']; ?></td>
-    </tr>
-    <tr>
-      <td>Alamat :</td>
-      <td><?php echo $r['alamat']; ?></td>
-    </tr>
-    </th>
+  <tr>
+  <td>Kode konsumen :</td>
+  <td><?php echo $r['kode']; ?></td>
+</tr>
+<tr>
+  <td>Nama :</td>
+  <td><?php echo $r['nama']; ?></td>
+</tr>
+<tr>
+  <td>alamat :</td>
+  <td><?php echo $r['alamat']; ?></td>
+</tr>
   </tbody>
 </table>
+<a class="button" href="javascript:printDiv('print-area');" >Print</a>
 <a href="?module=konsumen-delete&id=<?php echo $r['id']; ?>"onClick='return confirm("Apakah yakin menghapus?")' class="alert button">Delete</a>
 <a class="button" href='javascript:self.history.back();'>Kembali</a>
 </div>
 <?php }}?>
+
+<style>
+@media print {
+   * { color: black; background: white; }
+   table { font-size: 80%; }
+}
+</style>
+
+<iframe id="printing-frame" name="print_frame" src="about:blank" style="display:none;"></iframe>
+
+<script type="text/javascript">
+     
+     function printDiv(elementId) {
+    var a = document.getElementById('print-area').value;
+    var b = document.getElementById(elementId).innerHTML;
+    window.frames["print_frame"].document.title = document.title;
+    window.frames["print_frame"].document.body.innerHTML = '<style>' + a + '</style>' + b;
+    window.frames["print_frame"].window.focus();
+    window.frames["print_frame"].window.print();
+}
+</script>

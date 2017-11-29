@@ -20,9 +20,12 @@
   $db=new Database();
   $db->select('barang', 'id, kode, nama, stok, tanggal_update_stok');
   $res=$db->getResult();
-    if(count($res) == 0){
-        echo "<b>Tidak ada data yang tersedia</b>";
-    }else{
+    if(count($res) == 0){ ?>
+        <tr>
+            <td colspan="8">Tidak ada data yang tersedia </td>
+        </tr>
+    <?php
+        }else{
         foreach ($res as &$r){?>
         <tr>
             <td><?php echo $r['kode'] ?></td>

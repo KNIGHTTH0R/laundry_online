@@ -5,9 +5,7 @@
           <li class="menu-text"><h12>XII RPL 2</h12></li>
         </ul>
       </div>
-      <!-- <div class="top-bar-right">
-        <ul class="menu">
-          <li class="menu-text"><a href="logout.php" aria-label="logout">logout</a></li>        
-        </ul>
-      </div> -->
+      <div class="top-bar-right">
+      <li><a href="logout.php">Logout</a></li>
     </div>
+  </div>

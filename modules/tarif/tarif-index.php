@@ -8,7 +8,7 @@
 <table>
   <thead>
       <tr>
-          <th>nama</th>
+          <th>Nama Pakaian</th>
           <th>harga </th>
           <th>jenis laundry </th> 
           <th>Aksi</th>
@@ -23,8 +23,11 @@
   'jenis_laundry ON jenis_laundry.id = tarif.jenis_laundry_id');
 $res=$db->getResult();
 //   print_r($res);
-    if(count($res) == 0){
-        echo "<b>Tidak ada data yang tersedia</b>";
+if(count($res) == 0){ ?>
+    <tr>
+        <td colspan="8">Tidak ada data yang tersedia </td>
+    </tr>
+<?php
     }else{
         foreach ($res as &$r){?>
         <tr>

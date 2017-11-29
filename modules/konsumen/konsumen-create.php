@@ -1,3 +1,7 @@
+<?php
+ob_start();
+?>
+<?php require_once("database.php"); ?>
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
   <li>
@@ -7,14 +11,21 @@
 </nav>
 <form action="" method="post">
  <!-- field kode -->
-  <div class="grid-x grid-padding-x">
-    <div class="small-3 cell">
-      <label for="kode" class="text-right middle">KODE</label>
-    </div>
-    <div class="small-6 cell">
-      <input type="text" name="kode" placeholder="kode" required>
-    </div>
-  </div>
+<div class="grid-x grid-padding-x">
+<div class="small-3 cell">
+  <label for="kode" class="text-right middle">kode</label>
+</div>
+<div class="small-6 cell">
+<?php
+  $db = new Database();
+  $db->selectMax('konsumen','id');
+  $res = $db->getResult();
+  $kode = $res[0]['max'] < 1 ? $res[0]['max']+1  : $res[0]['max']+1;
+  $value = 'K000'.$kode;
+  echo "<input type='text' name='kode' value='$value' placeholder='kode' readonly>";
+?>
+</div>
+</div>
   <!-- field nama -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
@@ -48,7 +59,6 @@
   </div>
 </form>
 <?php 
-require_once("database.php");
 
 // check action submit
 if(isset($_POST['submit'])){

@@ -8,6 +8,7 @@
 <table>
   <thead>
       <tr>
+        <th>Kode</th>
           <th>Nama</th>
           <th>Aksi</th>
       </tr>
@@ -15,13 +16,17 @@
 <?php
   require_once("database.php");
   $db=new Database();
-  $db->select('jenis_laundry', 'id, nama');
+  $db->select('jenis_laundry', 'id, kode,nama');
   $res=$db->getResult();
-    if(count($res) == 0){
-        echo "<b>Tidak ada data yang tersedia</b>";
+  if(count($res) == 0){ ?>
+    <tr>
+        <td colspan="8">Tidak ada data yang tersedia </td>
+    </tr>
+<?php
     }else{
         foreach ($res as &$r){?>
         <tr>
+        <td><?php echo $r['kode'] ?></td>
             <td><?php echo $r['nama'] ?></td>
             <td>
                 <div class="small button-group">

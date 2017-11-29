@@ -19,6 +19,45 @@ if(count($res) == 0){
 </nav>
 <form action="" method="post">
 
+<!-- field karyawan_id -->
+<div class="grid-x grid-padding-x">
+    <div class="small-3 cell">
+      <label for="karyawan_id" class="text-right middle">karyawan </label>
+    </div>
+    <div class="small-6 cell">
+      <select name="karyawan_id">
+      <?php
+        $db = new Database();
+        $db->select('karyawan','id, nama');
+        $karyawans = $db->getResult();
+        foreach ($karyawans as &$karyawan){ 
+          $selected =$r['karyawan_id'] == $karyawan['id'] ? 'selected' : '';
+            echo "<option value=$karyawan[id]  $selected > $karyawan[nama] </option>";
+        }?>
+      </select>
+    </div>
+  </div>
+
+<!-- field konsumen_id -->
+<div class="grid-x grid-padding-x">
+    <div class="small-3 cell">
+      <label for="konsumen_id" class="text-right middle">konsumen </label>
+    </div>
+    <div class="small-6 cell">
+      <select name="konsumen_id">
+      <?php
+        $db = new Database();
+        $db->select('konsumen','id, nama');
+        $konsumens = $db->getResult();
+        foreach ($konsumens as &$konsumen){ 
+          $selected =$r['konsumen_id'] == $konsumen['id'] ? 'selected' : '';
+            echo "<option value=$konsumen[id]  $selected > $konsumen[nama] </option>";
+        }?>
+      </select>
+    </div>
+  </div>
+
+
   <!-- field jumlah -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
@@ -49,7 +88,43 @@ if(count($res) == 0){
 </div>
 </div>
 
+<!-- field barang_id -->
+<div class="grid-x grid-padding-x">
+    <div class="small-3 cell">
+      <label for="barang_id" class="text-right middle">barang </label>
+    </div>
+    <div class="small-6 cell">
+      <select name="barang_id">
+      <?php
+        $db = new Database();
+        $db->select('barang','id, nama');
+        $barangs = $db->getResult();
+        foreach ($barangs as &$barang){ 
+          $selected =$r['barang_id'] == $barang['id'] ? 'selected' : '';
+            echo "<option value=$barang[id]  $selected > $barang[nama] </option>";
+        }?>
+      </select>
+    </div>
+  </div>
 
+<!-- field jenis_laundry_id -->
+<div class="grid-x grid-padding-x">
+    <div class="small-3 cell">
+      <label for="jenis_laundry_id" class="text-right middle">Jenis Laundry </label>
+    </div>
+    <div class="small-6 cell">
+      <select name="jenis_laundry_id">
+      <?php
+        $db = new Database();
+        $db->select('jenis_laundry','id, nama');
+        $jenis_laundrys = $db->getResult();
+        foreach ($jenis_laundrys as &$jenis_laundry){ 
+          $selected =$r['jenis_laundry_id'] == $jenis_laundry['id'] ? 'selected' : '';
+            echo "<option value=$jenis_laundry[id]  $selected > $jenis_laundry[nama] </option>";
+        }?>
+      </select>
+    </div>
+  </div>
 
   <!-- field tarif_id -->
   <div class="grid-x grid-padding-x">

@@ -10,6 +10,46 @@ ob_start();
 </ul>
 </nav>
 <form action="" method="post">
+<!-- field karyawan -->
+<div class="grid-x grid-padding-x">
+    <div class="small-3 cell">
+      <label for="karyawan_id" class="text-right middle">karyawan</label>
+    </div>
+    <div class="small-6 cell">
+      <select name="karyawan_id">
+      <option value = ""> Pilih Nama karyawan </option>
+      <?php
+        $db = new Database();
+        $db->select('karyawan','id, nama');
+        $res = $db->getResult();
+        foreach ($res as &$r){
+          echo "<option value=$r[id]>$r[nama]</option>";
+        }    
+      ?>
+      </select>
+    </div>
+  </div>
+  
+  <!-- field konsumen -->
+<div class="grid-x grid-padding-x">
+    <div class="small-3 cell">
+      <label for="konsumen_id" class="text-right middle">konsumen</label>
+    </div>
+    <div class="small-6 cell">
+      <select name="konsumen_id">
+      <option value = ""> Pilih Nama konsumen </option>
+      <?php
+        $db = new Database();
+        $db->select('konsumen','id, nama');
+        $res = $db->getResult();
+        foreach ($res as &$r){
+          echo "<option value=$r[id]>$r[nama]</option>";
+        }    
+      ?>
+      </select>
+    </div>
+  </div>
+  
   <!-- field jumlah -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
@@ -38,6 +78,47 @@ ob_start();
       </select>
     </div>
   </div>
+
+<!-- field barang -->
+<div class="grid-x grid-padding-x">
+    <div class="small-3 cell">
+      <label for="barang_id" class="text-right middle">barang</label>
+    </div>
+    <div class="small-6 cell">
+      <select name="barang_id">
+      <option value = ""> Pilih Nama barang </option>
+      <?php
+        $db = new Database();
+        $db->select('barang','id, nama');
+        $res = $db->getResult();
+        foreach ($res as &$r){
+          echo "<option value=$r[id]>$r[nama]</option>";
+        }    
+      ?>
+      </select>
+    </div>
+  </div>
+  
+  <!-- field jenis_laundry -->
+<div class="grid-x grid-padding-x">
+    <div class="small-3 cell">
+      <label for="jenis_laundry_id" class="text-right middle"> Jenis Laundry</label>
+    </div>
+    <div class="small-6 cell">
+      <select name="jenis_laundry_id">
+      <option value = ""> Pilih Nama Jenis Laundry </option>
+      <?php
+        $db = new Database();
+        $db->select('jenis_laundry','id, nama');
+        $res = $db->getResult();
+        foreach ($res as &$r){
+          echo "<option value=$r[id]>$r[nama]</option>";
+        }    
+      ?>
+      </select>
+    </div>
+  </div>
+
   <!-- field tarif -->
   <div class="grid-x grid-padding-x">
     <div class="small-3 cell">
@@ -76,15 +157,23 @@ ob_start();
 
 // check action submit
 if(isset($_POST['submit'])){
+  $karyawan_id = $_POST['karyawan_id'];
+  $konsumen_id = $_POST['konsumen_id'];
   $jumlah = $_POST['jumlah'];
   $transaksi_id = $_POST['transaksi_id'];
+  $barang_id = $_POST['barang_id'];
+  $jenis_laundry_id = $_POST['jenis_laundry_id'];
   $tarif_id = $_POST['tarif_id'];
   
   $db=new Database();
   $db->insert('rincian_transaksi',
   array(
+    'karyawan_id'=>$karyawan_id,
+    'konsumen_id'=>$konsumen_id,
     'jumlah'=>$jumlah,
     'transaksi_id'=>$transaksi_id,
+    'barang_id'=>$barang_id,
+    'jenis_laundry_id'=>$jenis_laundry_id,
     'tarif_id'=>$tarif_id
   ));
   $res=$db->getResult();

@@ -1,0 +1,95 @@
+index,php
+<?php
+// mengaktifkan session
+session_start();
+
+// cek apakah user telah login, jika belum login maka di alihkan ke halaman login
+if($_SESSION['status'] !="login"){
+  header('Location: /laundry2/login.php');
+}
+?>
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laundry | Welcome</title>
+    <link rel="stylesheet" href="css/foundation.css">
+  </head>
+  <body>
+    <!-- Start Top Bar -->
+    <?php include 'includes/navbar.php'; ?>
+    <!-- End Top Bar -->
+
+    <?php include 'includes/jumbotron.php'; ?>
+    
+    <div class="grid-container fluid">
+      <div class="grid-x grid-margin-x" id="content">
+        <div class="medium-4 cell card" style="
+             padding-left: 20px;
+             padding-top: 20px;
+             padding-bottom: 20px;
+        ">
+          <?php include 'includes/sidebar.php'; ?>
+        </div>
+        <div class="medium-8 cell card" style="
+             padding-left: 20px;
+             padding-top: 20px;
+             padding-bottom: 20px;
+        ">
+          <?php include 'content.php'; ?>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script>
+      $(document).foundation();
+
+    </script>
+  </body>
+</html>
+
+
+sidebar.php
+    <div data-sticky-container>
+        <div class="sticky" data-sticky data-anchor="content">
+        
+         <ul class="vertical menu">
+      <li>
+          <li id="home">
+            <a href="?module=home" aria-label="Home">Home</a>
+          </li>
+            <a href="#">Master</a>
+              <ul class="nested vertical menu">
+                  <li><a href="?module=karyawan" aria-label="Kayawan">Kayawan</a></li>
+                  <li><a href="?module=konsumen" aria-label="Konsumen">Konsumen</a></li>
+                  <li><a href="?module=supplier" aria-label="Supplier">Supplier</a></li>
+                  <li><a href="?module=barang" aria-label="Barang">Barang</a></li>
+                  <li><a href="?module=jenis_laundry" aria-label="Jenis Laundry">Jenis Laundry</a></li>
+                  
+              </ul>
+      </li>
+
+      <li>
+      <a href="#">Transaksi</a>
+      <ul class="nested vertical menu">
+              <li><a href="?module=pemakaian_barang" aria-label="Pemakaian Barang">Pemakaian Barang</a></li>
+              <li><a href="?module=pembelian" aria-label="Pembelian">Pembelian</a></li>
+              <li><a href="?module=tarif" aria-label="Tarif">Tarif</a></li>
+              <li><a href="?module=transaksi" aria-label="Transaksi">Transaksi</a></li>
+              <li><a href="?module=rincian_pembelian" aria-label="Rincian Pembelian">Rincian Pembelian</a></li>
+      </ul>
+      </li>
+      <li><a href="#">Laporan</a>
+      <ul class="nested vertical menu">
+        <li><a href="?module=rincian_transaksi" aria-label="Rincian Transaksi">Rincian Transaksi</a></li>
+      </ul>
+      </li>
+  </ul>
+        </div>
+      </div>
+
+      </div>
+

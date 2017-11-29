@@ -24,7 +24,7 @@
               <input type="text" name="username" placeholder="Username" required>
             </div>
           </div>
-          <!-- field alamat -->
+          <!-- field password -->
           <div class="grid-x grid-padding-x">
             <div class="small-4 cell">
               <label for="password" class="text-right middle">Password</label>

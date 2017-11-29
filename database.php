@@ -140,6 +140,42 @@ class Database {
       		return false; // Table does not exist
     	}
     }
+    public function selectMax($table, $field) {
+        $q = 'SELECT MAX('.$field.') as max FROM '.$table;
+        // echo $table;
+        $this->myQuery = $q; // Pass back the SQL
+		// Check to see if the table exists
+        if($this->tableExists($table)){
+        	// The table exists, run the query
+        	$query = $this->myconn->query($q);    
+			if($query){
+				// If the query returns >= 1 assign the number of rows to numResults
+				$this->numResults = $query->num_rows;
+				// Loop through the query results by the number of rows returned
+				for($i = 0; $i < $this->numResults; $i++){
+					$r = $query->fetch_array();
+                	$key = array_keys($r);
+                	for($x = 0; $x < count($key); $x++){
+                		// Sanitizes keys so only alphavalues are allowed
+                    	if(!is_int($key[$x])){
+                    		if($query->num_rows >= 1){
+                    			$this->result[$i][$key[$x]] = $r[$key[$x]];
+							}else{
+								$this->result[$i][$key[$x]] = null;
+							}
+						}
+					}
+				}
+				return true; // Query was successful
+			}else{
+				array_push($this->result, $this->myconn->error);
+				return false; // No rows where returned
+			}
+      	}else{
+      		return false; // Table does not exist
+    	}
+    }
+	
 	
 	// Function to insert into the database
     public function insert($table, $params=array()){

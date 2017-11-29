@@ -6,25 +6,23 @@ ob_start();
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
   <li>
-    <a href="?module=pembelian?">Home</a></li>
-  <li class="disabled">Detail Pembelian</li>
+    <a href="?module=rincian?">Home</a></li>
+  <li class="disabled">Detail Rincian</li>
 </ul>
 </nav>
 <div class="grid-x grid-padding-x">
 <?php
 $id=$_GET['id'];
 $db = new Database();
-$db->select('pembelian', 
-'pembelian.id, 
-pembelian.nomer,
-pembelian.tanggal,
-pembelian.total,
-pembelian.karyawan_id,
-pembelian.supplier_id,
-karyawan.nama as karyawan,
-supplier.nama as supplier',
-'karyawan ON karyawan.id = pembelian.karyawan_id' ,
-'supplier ON suppleir.id = pembelian.supplier_id', "pembelian.id=$id"
+$db->select('rincian', 
+'rincian.id, 
+rincian.jumlah,
+rincian.tarif_id,
+rincian.jenis_laundry_id,
+tarif.nama as tarif,
+jenis_laundry.nama as jenis_laundry',
+'tarif ON tarif.id = rincian.tarif_id' ,
+'jenis_laundry ON suppleir.id = rincian.jenis_laundry_id', "rincian.id=$id"
 );
 $res= $db->getResult();
 // print_r($res);
@@ -42,29 +40,21 @@ if(count($res) == 0){ ?>
 <table id="print-area">
   <tbody>
   <tr>
-  <td> Nomer Pembelian :</td>
-  <td><?php echo $r['nomer']; ?></td>
+  <td> jumlah baju :</td>
+  <td><?php echo $r['jumlah']; ?></td>
 </tr>
 <tr>
-  <td> Tanggal :</td>
-  <td><?php echo $r['tanggal']; ?></td>
+  <td>tarif ID :</td>
+  <td><?php echo $r['tarif']; ?></td>
 </tr>
 <tr>
-  <td> Total :</td>
-  <td><?php echo $r['total']; ?></td>
-</tr>
-<tr>
-  <td>Karyawan ID :</td>
-  <td><?php echo $r['karyawan']; ?></td>
-</tr>
-<tr>
-  <td>Supplier ID :</td>
-  <td><?php echo $r['supplier']; ?></td>
+  <td>jenis_laundry ID :</td>
+  <td><?php echo $r['jenis_laundry']; ?></td>
 </tr>
   </tbody>
 </table>
 <a class="button" href="javascript:printDiv('print-area');" >Print</a>
-<a href="?module=pembelian-delete&id=<?php echo $r['id']; ?>"onClick='return confirm("Apakah yakin menghapus?")' class="alert button">Delete</a>
+<a href="?module=rincian-delete&id=<?php echo $r['id']; ?>"onClick='return confirm("Apakah yakin menghapus?")' class="alert button">Delete</a>
 <a class="button" href='javascript:self.history.back();'>Kembali</a>
 </div>
 <?php }}?>

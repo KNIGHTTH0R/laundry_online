@@ -55,6 +55,46 @@ if(count($res) == 0){
       <input type="text" name="diskon" placeholder="diskon" value="<?php echo $r['diskon']; ?>" required>
     </div>
   </div>
+  <!-- field konsumen_id -->
+  <div class="grid-x grid-padding-x">
+  <div class="small-3 cell">
+    <label for="konsumen_id" class="text-right middle">konsumen </label>
+  </div>
+  <div class="small-6 cell">
+      <select name="konsumen_id">
+      <?php
+        $db = new Database();
+        $db->select('konsumen','id, nama');
+        $konsumens = $db->getResult();
+        foreach ($konsumens as &$konsumen){ 
+          $selected =$r['konsumen_id'] == $konsumen['id'] ? 'selected' : '';
+            echo "<option value=$konsumen[id]  $selected > $konsumen[nama] </option>";
+        }?>
+      </select>
+</div>
+</div>
+
+
+
+  <!-- field karyawan_id -->
+  <div class="grid-x grid-padding-x">
+    <div class="small-3 cell">
+      <label for="karyawan_id" class="text-right middle">Karyawan </label>
+    </div>
+    <div class="small-6 cell">
+      <select name="karyawan_id">
+      <?php
+        $db = new Database();
+        $db->select('karyawan','id, nama');
+        $karyawans = $db->getResult();
+        foreach ($karyawans as &$karyawan){ 
+          $selected =$r['karyawan_id'] == $karyawan['id'] ? 'selected' : '';
+            echo "<option value=$karyawan[id]  $selected > $karyawan[nama] </option>";
+        }?>
+      </select>
+    </div>
+  </div>
+  
   
   <!-- Aksi -->
   <div class="grid-x grid-padding-x">
@@ -81,12 +121,16 @@ if(isset($_POST['submit'])){
   $tanggal_transaksi = $_POST['tanggal_transaksi'];
   $tanggal_ambil = $_POST['tanggal_ambil'];
   $diskon = $_POST['diskon'];
+  $konsumen_id = $_POST['konsumen_id'];
+  $karyawan_id = $_POST['karyawan_id'];
   $db = new Database();
   $db->update('transaksi',array(
     'nomer'=>$nomer,
     'tanggal_transaksi'=>$tanggal_transaksi,
     'tanggal_ambil'=>$tanggal_ambil,
     'diskon'=>$diskon,
+    'konsumen_id'=>$konsumen_id,
+    'karyawan_id'=>$karyawan_id,
   ),
     "id=$id"
   );

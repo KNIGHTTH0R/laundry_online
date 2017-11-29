@@ -1,7 +1,7 @@
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
   <li><a href="?module=home">Home</a></li>
-  <li class="disabled">Data pemakaian barang</li>
+  <li class="disabled">Data Rincian Pembelian</li>
 </ul>
 </nav>
   <a href="?module=rincian_pembelian-create" class="small button">Create</a>
@@ -26,8 +26,11 @@
 
   $res=$db->getResult();
 //   print_r($res);
-    if(count($res) == 0){
-        echo "<b>Tidak ada data yang tersedia</b>";
+if(count($res) == 0){ ?>
+    <tr>
+        <td colspan="8">Tidak ada data yang tersedia </td>
+    </tr>
+<?php
     }else{
         foreach ($res as &$r){?>
         <tr>

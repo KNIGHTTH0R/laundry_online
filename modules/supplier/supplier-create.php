@@ -1,3 +1,7 @@
+<?php
+ob_start();
+?>
+<?php require_once("database.php"); ?>
 <nav aria-label="You are here:" role="navigation">
 <ul class="breadcrumbs">
   <li>
@@ -48,7 +52,6 @@
   </div>
 </form>
 <?php 
-require_once("database.php");
 
 // check action submit
 if(isset($_POST['submit'])){
